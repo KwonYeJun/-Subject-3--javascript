@@ -13,6 +13,7 @@ function mobile() {
       qnahTagName.appendChild(divMaker);
     }
   }
+
   //root안에 div태그를 3개 생성해주었다.
   divMaker(root, 1);
   divMaker(root.children[0], 3);
@@ -53,17 +54,16 @@ function mobile() {
     spicklayout: ["4%", "10%", "", "", "", "", "","1px solid rgb(250, 181, 33)"],
     homebtn: ["65%", "43%", "flex", "", "center", "center", "50%","1px solid rgb(250, 181, 33)"],
     homebtnchild: ["65%", "43%", "flex", "", "center", "center", "","1px solid rgb(250, 181, 33)"],
-
   }
 
-  let qnahstyleName = ["height", "width", "display", "felexDirectrion", "justifyContent", "alignItems", "borderRadius", "border", "position", "marginTop"];
+  let qnahstyleName = ["height", "width", "display", "felexDirection", "justifyContent", "alignItems", "borderRadius", "border", "position", "marginTop"];
 
   let qnahStyle = {
-    header: ["15%", "100%", "flex", "", "center", "center", "","1px solid rgb(250, 181, 33)", "fixed"],
-    nav: ["25%", "100%", "flex", "column","center", "center", "","1px solid rgb(250, 181, 33)"],
+    header: ["15%", "100%", "flex", "column", "center", "center", "","1px solid rgb(250, 181, 33)", ""],
+    nav: ["25%", "100%", "flex", "column","center", "center", "","1px solid rgb(250, 181, 33)","",""],
     main: ["25%", "100%", "flex", "column","center", "center", "", "1px solid rgb(250, 181, 33)"],
     footer: ["25%", "100%", "flex", "column","center", "center", "", "1px solid rgb(250, 181, 33)"],
-
+    headerdiv: ["40%", "80%", "flex", "column", "center", "center", "","", ""],
   }
 
   //함수를 이용해 스타일을 주기 위해 만들었다.
@@ -97,25 +97,42 @@ function mobile() {
   tagStyle("#root > div > div:nth-child(2) > main", qnahStyle.main, qnahstyleName);
   tagStyle("#root > div > div:nth-child(2) > footer", qnahStyle.footer, qnahstyleName);
   tagStyle("#root > div > div:nth-child(2) > footer", qnahStyle.footer, qnahstyleName);
+  tagStyle("#root > div > div:nth-child(2) > header > div", qnahStyle.headerdiv, qnahstyleName);
 
   let keylist = Object.keys(a.teamInformation.teamAllMember[0]);
 
-  function textAdd(parent, counter,br) {
+  function textAdd(parent, counter) {
     for (let i = 1; i < keylist.length; i++) {
       const parentTag = document.querySelector(parent);
       const childTag = document.createElement("p");
     
       childTag.textContent = a.teamInformation.teamAllMember[counter][keylist[i]];
       parentTag.appendChild(childTag);
-      parentTag.appendChild(br);
+   
     }
   }
+
+  let listteamName = ["teamNumber","teamName","teamNameStory"];
+  function textAddName(parent,list) {
+    const parentTag = document.querySelector(parent);
+    const childTag = document.createElement("div"); 
+    for (let i = 1; i < keylist.length; i++) {
+      
+     
+      childTag.textContent = a.teamInformation[list[i]];
+     
+    }
+    parentTag.appendChild(childTag); 
+  }
+
+
   for(let i = 0 ; i < keylist.length;i++){
-    const br = document.createElement("br");
-    textAdd("#root > div > div:nth-child(2) > main > div",i,br);
-  
+ 
+    textAdd("#root > div > div:nth-child(2) > main > div",i);
 }
 
+textAddName("#root > div > div:nth-child(2) > header > div",listteamName);
+// textAddName("#root > div > div:nth-child(2) > footer",trainingInformation);
   console.log(a.teamInformation.teamAllMember[0][keylist[1]]);
 
 }
